@@ -1,0 +1,34 @@
+{
+  "name": "payment_login",
+  "version": "1.0.0",
+  "description": "modify this login page with only css, please do not do anything on the HTML code\r write in your comment or commit if HTML will need to be touched.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js",
+    "dev": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/olasmart18/payment_login.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/olasmart18/payment_login/issues"
+  },
+  "homepage": "https://github.com/olasmart18/payment_login#readme",
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "connect-mongoose-session": "^0.4.8",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.22"
+  }
+}
