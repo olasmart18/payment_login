@@ -1,4 +1,5 @@
 const User = require('../models/userModel');
+const path = require('path');
 
 exports.register = async (req, res) => {
 
