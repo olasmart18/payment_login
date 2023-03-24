@@ -5,7 +5,7 @@ const path = require('path');
 
 // ///////send login page from the frontend//////////
 exports.loginPage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../../frontend', 'login.html'));
+  return res.sendFile(path.join(__dirname, '../../frontend', 'login.html'));
 };
 
 // ///////send registration page from the frontend//////////
@@ -45,5 +45,22 @@ exports.register = async (req, res) => {
 
 //  ///// login user if already register///////
 exports.login = async (req, res) => {
+  const email = req.body.email;
+  const password = req.body.password;
 
+  const userExist = await User.findOne({ email: email });
+  try {
+    if (userExist) {
+      const checkPassword = bcrypt.compareSync(password, userExist.password);
+      if (checkPassword) {
+        res.send('you have logged in');
+      } else {
+        res.send('incorrect password or username');
+      }
+    } else {
+      res.send('cannot find user, please register');
+    }
+  } catch (error) {
+    res.send(error);
+  }
 };
