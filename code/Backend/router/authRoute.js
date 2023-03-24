@@ -9,10 +9,12 @@ const {
 
 } = require('../controller/userController');
 
-// router.route('/auth/register').get(registerPage).post(register);
-router.get('/auth/register', registerPage);
+router.route('/auth/register')
+  .get(registerPage) // get method
+  .post(register); // post method
+// router.get('/auth/register', registerPage);
 router.get('/auth/login', loginPage);
 router.post('/auth/login', login);
-router.post('/auth/register', register);
+// router.post('/auth/register', register);
 
 module.exports = router;
