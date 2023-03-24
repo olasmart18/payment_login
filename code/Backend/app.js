@@ -1,4 +1,5 @@
 const express = require('express');
+const path = require('path');
 // const bodyParser = require('body-parser');
 // const cookie = require('cookie-parser');
 const dotenv = require('dotenv');
@@ -15,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use('/', router);
 
-app.use(express.static('/frontend/public'));
+app.use(express.static(path.join(__dirname, 'frontend', 'public')));
 
 connect();
 
