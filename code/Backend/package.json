@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/olasmart18/payment_login#readme",
   "dependencies": {
+    "bcrypt": "^5.1.0",
     "body-parser": "^1.20.2",
     "connect-mongoose-session": "^0.4.8",
     "cookie-parser": "^1.4.6",

@@ -11,10 +11,10 @@ const userSchema = mongoose.Schema({
   },
   number: Number,
   country: {
-    type: String,
-    require: true
+    type: String
+    // require: true
   }
-}, { timestamp: true });
+}, { timestamps: true });
 
 const User = new mongoose.model('User', userSchema);
 

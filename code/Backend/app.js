@@ -1,5 +1,5 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+// const bodyParser = require('body-parser');
 // const cookie = require('cookie-parser');
 const dotenv = require('dotenv');
 dotenv.config();
@@ -10,8 +10,12 @@ const connect = require('./config/database');
 const port = process.env.PORT || 5050;
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+// app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
 app.use('/', router);
-app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use(express.static('/frontend/public'));
 
 connect();
 
