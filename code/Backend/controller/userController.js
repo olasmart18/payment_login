@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
-// const alert = require('../middleware/alert');
+// const session = require('../middleware/auth');
 const path = require('path');
 
 // ///////send login page from the frontend//////////
@@ -33,7 +33,6 @@ exports.register = async (req, res) => {
     });
     try {
       await newUser.save();
-      // alert();
       res.send('success');
     } catch (error) {
       res.send('error');
@@ -53,6 +52,9 @@ exports.login = async (req, res) => {
     if (userExist) {
       const checkPassword = bcrypt.compareSync(password, userExist.password);
       if (checkPassword) {
+        req.session.user = userExist._id;
+        req.session.isAuth = true;
+        req.session.role = 'user';
         res.send('you have logged in');
       } else {
         res.send('incorrect password or username');

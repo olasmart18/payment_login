@@ -1,4 +1,6 @@
 const mongoose = require('mongoose');
+const session = require('express-session');
+const connectMongoSession = require('connect-mongodb-session')(session);
 const db = 'userBD';
 
 const connect = async () => {
@@ -11,4 +13,9 @@ const connect = async () => {
   }
 };
 
-module.exports = connect;
+const store = new connectMongoSession({
+  uri: process.env.MONGO_URI + db,
+  collection: 'userSessions'
+});
+
+module.exports = { connect, store };
