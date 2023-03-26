@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
 const path = require('path');
-const session = require('express-session');
+// const session = require('express-session');
 
 // ///////get login page from the frontend//////////
 exports.loginPage = (req, res) => {
@@ -11,6 +11,11 @@ exports.loginPage = (req, res) => {
 // ///////get registration page from the frontend//////////
 exports.registerPage = (req, res) => {
   return res.sendFile(path.resolve('../public/reg.html'));
+};
+
+// //////get home page //////////////
+exports.page = (req, res) => {
+  return res.sendFile(path.resolve('../public/page.html'));
 };
 
 // /////// register new user and store in database ///////////
@@ -34,9 +39,12 @@ exports.register = async (req, res) => {
     });
     try {
       await newUser.save();
-      res.send('success');
+      res.redirect('/login');
     } catch (error) {
-      res.send('error');
+      res.status(400).json({
+        success: 'false',
+        message: 'Error, something went wrong'
+      });
     }
   } else {
     res.send('user already exist');
@@ -56,7 +64,7 @@ exports.login = async (req, res) => {
         req.session.user = userExist._id;
         req.session.isAuth = true;
         req.session.role = 'user';
-        res.send('you have logged in');
+        res.redirect('/page');
       } else {
         res.send('incorrect password or username');
       }
@@ -64,16 +72,24 @@ exports.login = async (req, res) => {
       res.send('cannot find user, please register');
     }
   } catch (error) {
-    res.send(error);
+    res.status(400).json({
+      success: 'false',
+      message: 'Error, something went wrong'
+    });
   }
 };
 
 // //////lougot user, delete session from db and clear cookie from browser///////
 exports.logout = async (req, res) => {
-  session.destroy((err) => {
+  req.session.destroy((err) => {
     if (!err) {
-      req.clearCookie('connect.sid');
-      res.redirect('/login');
+      res.clearCookie('connect.sid');
+      res.redirect('/api/auth/login');
+    } else {
+      res.status(400).json({
+        success: 'false',
+        message: 'Error, something went wrong'
+      });
     }
   });
 };

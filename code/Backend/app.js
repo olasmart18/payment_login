@@ -32,7 +32,7 @@ app.use(session({
   store: store
 }));
 app.use(cookieParser());
-app.use('/api/auth', router);
+app.use('/', router);
 
 connect(); // call the mongoose connection function
 
