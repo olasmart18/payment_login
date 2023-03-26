@@ -12,6 +12,11 @@ const { connect, store } = require('./config/database');
 const port = process.env.PORT || 5050;
 
 const app = express();
+app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+
+app.use(express.static(path.resolve('public')));
 
 // ////set sessions and cookies for user auth //////
 app.use(session({
@@ -27,13 +32,8 @@ app.use(session({
   store: store
 }));
 app.use(cookieParser());
-app.use(express.urlencoded({ extended: true }));
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.json());
-app.use('/', router);
+app.use('/api/auth', router);
 
-app.use(express.static(path.join(__dirname, 'frontend', 'public')));
-
-connect();
+connect(); // call the mongoose connection function
 
 app.listen(port, () => console.log(`serving on port ${port}`));

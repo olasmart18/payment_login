@@ -1,23 +1,24 @@
 const bcrypt = require('bcrypt');
 const User = require('../models/userModel');
-// const session = require('../middleware/auth');
 const path = require('path');
+const session = require('express-session');
 
-// ///////send login page from the frontend//////////
+// ///////get login page from the frontend//////////
 exports.loginPage = (req, res) => {
-  return res.sendFile(path.join(__dirname, '../../frontend', 'login.html'));
+  return res.sendFile(path.resolve('../public/login.html'));
 };
 
-// ///////send registration page from the frontend//////////
+// ///////get registration page from the frontend//////////
 exports.registerPage = (req, res) => {
-  return res.sendFile(path.join(__dirname, '../../frontend', 'reg.html'));
-//   console.log(res.dir);
+  return res.sendFile(path.resolve('../public/reg.html'));
 };
 
 // /////// register new user and store in database ///////////
 exports.register = async (req, res) => {
   const email = req.body.email;
   const password = req.body.password;
+
+  // //hash user password before saving in database/////////
   const salt = bcrypt.genSaltSync(10);
   const hash = bcrypt.hashSync(password, salt);
 
@@ -65,4 +66,14 @@ exports.login = async (req, res) => {
   } catch (error) {
     res.send(error);
   }
+};
+
+// //////lougot user, delete session from db and clear cookie from browser///////
+exports.logout = async (req, res) => {
+  session.destroy((err) => {
+    if (!err) {
+      req.clearCookie('connect.sid');
+      res.redirect('/login');
+    }
+  });
 };

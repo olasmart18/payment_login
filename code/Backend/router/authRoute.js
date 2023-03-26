@@ -9,11 +9,11 @@ const {
 
 } = require('../controller/userController');
 
-router.route('/auth/register')
+router.route('/register')
   .get(registerPage) // get method
   .post(register); // post method
 
-router.route('/auth/login')
+router.route('/login')
   .get(loginPage)
   .post(login);
 
