@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>login page</title>
+    <!-- <link  rel="stylesheet" type="style/css" href="./css/style.css" /> -->
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="left">
+        <img type="image/jpeg" src="image/IMG-20220627-WA0001.jpg" alt="" />
+        
+        <div class="trade">
+          <h4>Trade Globally</h4>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro
+            obcaecati consectetur fugit
+          </p>
+        </div>
+      </div>
+      <div class="right">
+        <div class="form">
+          <h4>Create new account</h4>
+          <form action="/api/auth/register" method="post">
+            <div class="txt-field">
+              <label for="">Email address</label>
+              <input type="text" name="email" placeholder="jogh@gmail.com" />
+            </div>
+            <div class="txt-field">
+              <label for="">Password</label>
+              <input type="password" name="password" placeholder="*******" required />
+            </div>
+            <div class="txt-field">
+              <label for="">chose your country</label>
+              <select name="country" id="" >
+                <option value="man"></option>
+              </select>
+            </div>
+            <div class="txt-field">
+              <label for="">input your number</label>
+              <input type="digit" name="number" >
+            </div>
+            <div class="submit">
+              <button type="submit">sign up</button>
+            </div>
+            <div class="">
+              Already have an account? <a href="./login">Login</a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
